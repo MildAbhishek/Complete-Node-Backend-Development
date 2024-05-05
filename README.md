@@ -8,3 +8,6 @@ https://app.eraser.io/workspace/YtPqZ1VogxGy1jzIDkzj
 
 <!-- Git Ignore Generator -->
 https://www.toptal.com/developers/gitignore
+
+<!-- Cloudinary -->
+https://console.cloudinary.com/settings/
