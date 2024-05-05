@@ -5,6 +5,8 @@ import { uploadOnCloudinary } from '../utils/cloudinary.js';
 import { ApiResponse } from '../utils/ApiResponse.js';
 
 const registerUser = asyncHandler( async (req, res, next) =>{
+    // console.log(req)
+    
     // Get User Details
     const {userName, email, fullName, password} = req.body;
     // console.log(userName + "--" + email);
@@ -16,7 +18,7 @@ const registerUser = asyncHandler( async (req, res, next) =>{
 
     // Check If User Already Exist
     // User.findOne({email})
-    const existedUser = User.findOne({
+    const existedUser = await User.findOne({
         $or: [{userName}, {email}]
     })
     if(existedUser){
@@ -24,8 +26,14 @@ const registerUser = asyncHandler( async (req, res, next) =>{
     }
 
     // Check For Images and Avatar
-    const avatarLocalPath = req.files?.avatar[0]?.path;
-    const coverImageLocalPath  = req.files?.coverImage[0]?.path;
+    // console.log(req.files?.avatar[0]?.path)
+
+    // files: [Object: null prototype] {
+    //     avatar: [ [Object] ],
+    //     coverImage: [ [Object] ]
+    //   },
+    const avatarLocalPath = req.files?.avatar?.avatar[0]?.path;
+    const coverImageLocalPath  = req.files?.coverImage?.coverImage[0]?.path;
 
     if(!avatarLocalPath){
         throw new ApiError(400, "Avatar image is required");
@@ -35,10 +43,10 @@ const registerUser = asyncHandler( async (req, res, next) =>{
     const avatar = await uploadOnCloudinary(avatarLocalPath);
     
     const coverImage = await uploadOnCloudinary(coverImageLocalPath);
-  
+    
    
     if(!avatar) {
-        throw new ApiError(400, "Avatar image is required");
+        throw new ApiError(400, "Avatar image is mandatory");
     }
 
     // Create User Object - create entry in DB
@@ -66,11 +74,6 @@ const registerUser = asyncHandler( async (req, res, next) =>{
     return res.status(201).json(
         new ApiResponse(200, createdUser, "User registered sucessfully")
     );
-
-
-    // return res.status(200).json({
-    //     message: "ok"
-    // })
 })
 
 export {registerUser};
