@@ -10,4 +10,9 @@ https://app.eraser.io/workspace/YtPqZ1VogxGy1jzIDkzj
 https://www.toptal.com/developers/gitignore
 
 <!-- Cloudinary -->
-https://console.cloudinary.com/settings/
+https://console.cloudinary.com/pm/c-86b550d70e259f5684975ef1044bef/getting-started
+
+<!-- #888787 -->
+
+<!-- Postman cookie -->
+https://learning.postman.com/docs/sending-requests/response-data/cookies/
