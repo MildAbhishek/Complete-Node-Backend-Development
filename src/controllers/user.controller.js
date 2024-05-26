@@ -352,12 +352,12 @@ const getUserChannelProfile = asyncHandler(async(req, res)=>{
     const channel = await User.aggregate([
         {
             $match:{
-                username: username?.toLowerCase()
+                userName: username?.toLowerCase()
             }
         },
         {
             $lookup:{
-                from:"Subscriptions",
+                from:"subscriptions",
                 localField:"_id",
                 foreignField:"channel",
                 as:"subscribers"
@@ -391,7 +391,7 @@ const getUserChannelProfile = asyncHandler(async(req, res)=>{
         {
             $project: {
                 fullName: 1,
-                username: 1,
+                userName: 1,
                 email: 1,
                 coverImage: 1,
                 avatar: 1,
@@ -402,7 +402,7 @@ const getUserChannelProfile = asyncHandler(async(req, res)=>{
         }
     ])
 
-    // console.log(channel)
+    // console.log("Channel::"+channel)
 
     if(!channel?.length){
         throw new ApiError(404, "channel does not exists")
@@ -422,7 +422,7 @@ const getWatchHistory = asyncHandler(async(req, res) => {
         },
         {
             $lookup: {
-                from: "Videos",
+                from: "videos",
                 localField: "watchHistory",
                 foreignField: "_id",
                 as: "watchHistory",
