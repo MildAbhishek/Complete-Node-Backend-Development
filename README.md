@@ -16,3 +16,6 @@ https://console.cloudinary.com/pm/c-86b550d70e259f5684975ef1044bef/getting-start
 
 <!-- Postman cookie -->
 https://learning.postman.com/docs/sending-requests/response-data/cookies/
+
+<!-- JSON Web Token -->
+https://github.com/auth0/node-jsonwebtoken#readme
